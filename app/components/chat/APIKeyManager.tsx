@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { IconButton } from '~/components/ui/IconButton';
 import type { ProviderInfo } from '~/types/model';
+import styles from './BaseChat.module.scss';
+import { classNames } from '~/utils/classNames';
 
 interface APIKeyManagerProps {
   provider: ProviderInfo;
@@ -22,15 +24,15 @@ export const APIKeyManager: React.FC<APIKeyManagerProps> = ({ provider, apiKey, 
 
   return (
     <div className="flex items-start sm:items-center mt-2 mb-2 flex-col sm:flex-row">
-      <div>
-        <span className="text-sm text-bolt-elements-textSecondary">{provider?.name} API Key:</span>
+      <div className='flex flex-row gap-4 items-center'>
+        <span className="text-sm text-bolt-elements-button-primary-background text-gray-500 font-semibold">{provider?.name} API Key :</span>
         {!isEditing && (
-          <div className="flex items-center mb-4">
-            <span className="flex-1 text-xs text-bolt-elements-textPrimary mr-2">
+          <div className="flex items-center ">
+            <span className="flex-1 text-xs text-bolt-elements-textPrimary mr-2 text-gray-700">
               {apiKey ? '••••••••' : 'Not set (will still work if set in .env file)'}
             </span>
             <IconButton onClick={() => setIsEditing(true)} title="Edit API Key">
-              <div className="i-ph:pencil-simple" />
+              <div className="i-ph:pencil-simple text-white" />
             </IconButton>
           </div>
         )}
@@ -43,21 +45,21 @@ export const APIKeyManager: React.FC<APIKeyManagerProps> = ({ provider, apiKey, 
             value={tempKey}
             placeholder="Your API Key"
             onChange={(e) => setTempKey(e.target.value)}
-            className="flex-1 px-2 py-1 text-xs lg:text-sm rounded border border-bolt-elements-borderColor bg-bolt-elements-prompt-background text-bolt-elements-textPrimary focus:outline-none focus:ring-2 focus:ring-bolt-elements-focus"
+            className={classNames(styles.bgboltelementsinputtext, 'flex-1 px-2 py-1 ml-4 text-xs lg:text-sm rounded border border-bolt-elements-borderColor text-white focus:outline-none focus:ring-2 focus:ring-bolt-elements-focus')}
           />
           <IconButton onClick={handleSave} title="Save API Key">
-            <div className="i-ph:check" />
+            <div className="i-ph:check text-white" />
           </IconButton>
           <IconButton onClick={() => setIsEditing(false)} title="Cancel">
-            <div className="i-ph:x" />
+            <div className="i-ph:x text-white" />
           </IconButton>
         </div>
       ) : (
         <>
           {provider?.getApiKeyLink && (
-            <IconButton className="ml-auto" onClick={() => window.open(provider?.getApiKeyLink)} title="Edit API Key">
-              <span className="mr-2 text-xs lg:text-sm">{provider?.labelForGetApiKey || 'Get API Key'}</span>
-              <div className={provider?.icon || 'i-ph:key'} />
+            <IconButton className="ml-auto bg-gray-700" onClick={() => window.open(provider?.getApiKeyLink)} title="Edit API Key">
+              <span className="mr-2 text-xs lg:text-sm text-gray-500 underline">{provider?.labelForGetApiKey || 'Get API Key'}</span>
+              <div className={provider?.icon || 'i-ph:key text-gray-400'} />
             </IconButton>
           )}
         </>

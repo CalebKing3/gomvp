@@ -1,5 +1,6 @@
 import { IconButton } from '~/components/ui/IconButton';
 import { classNames } from '~/utils/classNames';
+import styles from './BaseChat.module.scss';
 import React from 'react';
 
 export const SpeechRecognitionButton = ({
@@ -17,12 +18,12 @@ export const SpeechRecognitionButton = ({
     <IconButton
       title={isListening ? 'Stop listening' : 'Start speech recognition'}
       disabled={disabled}
-      className={classNames('transition-all', {
+      className={classNames(styles.iconsbg,'transition-all', {
         'text-bolt-elements-item-contentAccent': isListening,
       })}
       onClick={isListening ? onStop : onStart}
     >
-      {isListening ? <div className="i-ph:microphone-slash text-xl" /> : <div className="i-ph:microphone text-xl" />}
+      {isListening ? <div className="i-ph:microphone-slash text-xl text-white" /> : <div className="i-ph:microphone text-xl text-white" />}
     </IconButton>
   );
 };

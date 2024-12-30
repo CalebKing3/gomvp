@@ -11,6 +11,7 @@ import { logger } from '~/utils/logger';
 import { HistoryItem } from './HistoryItem';
 import { binDates } from './date-binning';
 import { useSearchFilter } from '~/lib/hooks/useSearchFilter';
+import { Header } from '../header/Header';
 
 const menuVariants = {
   closed: {
@@ -140,10 +141,10 @@ export const Menu = () => {
   return (
     <motion.div
       ref={menuRef}
-      initial="closed"
-      animate={open ? 'open' : 'closed'}
+      animate={'open'}
       variants={menuVariants}
-      className="flex selection-accent flex-col side-menu fixed top-0 w-[350px] h-full bg-bolt-elements-background-depth-2 border-r rounded-r-3xl border-bolt-elements-borderColor z-sidebar shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
+      style={{backgroundColor : 'black', borderRight: '1px solid #FFDE59'}}
+      className="flex selection-accent flex-col side-menu fixed top-0 w-[25%] h-full bg-bolt-elements-background-depth-2 border-bolt-elements-borderColor z-sidebar shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
     >
       <div className="h-[60px]" /> {/* Spacer for top margin */}
       <CurrentDateTime />
@@ -151,14 +152,14 @@ export const Menu = () => {
         <div className="p-4 select-none">
           <a
             href="/"
-            className="flex gap-2 items-center bg-bolt-elements-sidebar-buttonBackgroundDefault text-bolt-elements-sidebar-buttonText hover:bg-bolt-elements-sidebar-buttonBackgroundHover rounded-md p-2 transition-theme mb-4"
+            className="flex gap-2 items-center bg-[#2c2710] text-[#FFDE59] font-medium hover:bg-[#53491d] rounded-md p-3 transition-theme mb-4"
           >
             <span className="inline-block i-bolt:chat scale-110" />
             Start new chat
           </a>
           <div className="relative w-full">
             <input
-              className="w-full bg-white dark:bg-bolt-elements-background-depth-4 relative px-2 py-1.5 rounded-md focus:outline-none placeholder-bolt-elements-textTertiary text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary border border-bolt-elements-borderColor"
+              className="w-full bg-[#424242] dark:bg-bolt-elements-background-depth-4 relative px-2 py-2 rounded-md  placeholder-bolt-elements-textTertiary text-gray-400 dark:text-bolt-elements-textPrimary border border-bolt-elements-borderColor"
               type="search"
               placeholder="Search"
               onChange={handleSearchChange}
@@ -166,7 +167,7 @@ export const Menu = () => {
             />
           </div>
         </div>
-        <div className="text-bolt-elements-textPrimary font-medium pl-6 pr-5 my-2">Your Chats</div>
+        <div className="font-bold text-[2rem] pl-6 pr-5 mt-2 mb-4 text-[#424242]">Your Chats</div>
         <div className="flex-1 overflow-auto pl-4 pr-5 pb-5">
           {filteredList.length === 0 && (
             <div className="pl-2 text-bolt-elements-textTertiary">

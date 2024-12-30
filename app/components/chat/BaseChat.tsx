@@ -283,27 +283,23 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     const baseChat = (
       <div
         ref={ref}
-        className={classNames(styles.BaseChat, 'relative flex h-full w-full overflow-hidden')}
+        className={classNames(styles.BaseChat,styles.BasechatBackground, 'relative flex h-full w-full overflow-hidden')}
         data-chat-visible={showChat}
       >
+        <div className='w-[20%]'>
         <ClientOnly>{() => <Menu />}</ClientOnly>
-        <div ref={scrollRef} className="flex flex-col lg:flex-row overflow-y-auto w-full h-full">
-          <div className={classNames(styles.Chat, 'flex flex-col flex-grow lg:min-w-[var(--chat-min-width)] h-full')}>
-            {!chatStarted && (
-              <div id="intro" className="mt-[16vh] max-w-chat mx-auto text-center px-4 lg:px-0">
-                <h1 className="text-3xl lg:text-6xl font-bold text-bolt-elements-textPrimary mb-4 animate-fade-in">
-                  Where ideas begin
-                </h1>
-                <p className="text-md lg:text-xl mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200">
-                  Bring ideas to life in seconds or get help on existing projects.
-                </p>
-              </div>
-            )}
+        </div>
+        <div ref={scrollRef} className="flex flex-col lg:flex-row overflow-y-auto w-[80%] h-full">
+          {/* <div className='abdolute left-0 bottom-0  w-10 h-10 bg-red'/> */}
+          <div className={classNames(styles.Chat, 'flex flex-col flex-grow w-[70%] h-full')}>
             <div
-              className={classNames('pt-6 px-2 sm:px-6', {
-                'h-full flex flex-col': chatStarted,
-              })}
+              className={classNames('pt-6 px-2 sm:px-6'
+              , {
+                'h-full flex flex-col item-center': chatStarted,
+              }
+              )}
             >
+
               <ClientOnly>
                 {() => {
                   return chatStarted ? (
@@ -317,13 +313,26 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 }}
               </ClientOnly>
               <div
-                className={classNames(
-                  'bg-bolt-elements-background-depth-2 p-3 rounded-lg border border-bolt-elements-borderColor relative w-full max-w-chat mx-auto z-prompt mb-6',
+                className={classNames(styles.bgboltelementsinputbackground,styles.boltelementsmainColor,
+                  'p-3 rounded-lg border relative w-full max-w-chat mx-auto z-prompt mb-6',
                   {
                     'sticky bottom-2': chatStarted,
                   },
                 )}
               >
+                <div className='flex justify-center'>
+                <img src="/2.svg" alt="" className='w-[70px]'/>
+                </div>
+                {!chatStarted && (
+                  <div id="intro" className="max-w-chat mx-10 text-center px-4 lg:px-0">
+                    <h1 className="text-xl lg:text-5xl font-bold text-bolt-elements-textPrimary mb-2 animate-fade-in text-white">
+                      Where ideas begin
+                    </h1>
+                    <p className="text-md mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200 text-gray-400">
+                      Bring ideas to life in seconds or get help on existing projects.
+                    </p>
+                  </div>
+                )}
                 <svg className={classNames(styles.PromptEffectContainer)}>
                   <defs>
                     <linearGradient
@@ -379,8 +388,8 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   files={uploadedFiles}
                   imageDataList={imageDataList}
                   onRemove={(index) => {
-                    setUploadedFiles?.(uploadedFiles.filter((_, i) => i !== index));
-                    setImageDataList?.(imageDataList.filter((_, i) => i !== index));
+                  setUploadedFiles?.(uploadedFiles.filter((_, i) => i !== index));
+                  setImageDataList?.(imageDataList.filter((_, i) => i !== index));
                   }}
                 />
                 <ClientOnly>
@@ -394,14 +403,14 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   )}
                 </ClientOnly>
                 <div
-                  className={classNames(
+                  className={classNames(styles.bgboltelementsinputtext,
                     'relative shadow-xs border border-bolt-elements-borderColor backdrop-blur rounded-lg',
                   )}
                 >
                   <textarea
                     ref={textareaRef}
-                    className={classNames(
-                      'w-full pl-4 pt-4 pr-16 outline-none resize-none text-bolt-elements-textPrimary placeholder-bolt-elements-textTertiary bg-transparent text-sm',
+                    className={classNames(styles.bgboltelementsinputtext,
+                      'w-full pl-4 pt-4 pr-16 outline-none resize-none text-gray-400 placeholder-bolt-elements-textTertiary text-sm rounded-lg',
                       'transition-all duration-200',
                       'hover:border-bolt-elements-focus',
                     )}
@@ -489,20 +498,20 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   </ClientOnly>
                   <div className="flex justify-between items-center text-sm p-4 pt-2">
                     <div className="flex gap-1 items-center">
-                      <IconButton title="Upload file" className="transition-all" onClick={() => handleFileUpload()}>
-                        <div className="i-ph:paperclip text-xl"></div>
+                      <IconButton title="Upload file" className={classNames(styles.iconsbg, 'transition-all')} onClick={() => handleFileUpload()}>
+                        <div className={classNames('i-ph:paperclip text-xl text-white')}></div>
                       </IconButton>
                       <IconButton
                         title="Enhance prompt"
                         disabled={input.length === 0 || enhancingPrompt}
-                        className={classNames('transition-all', enhancingPrompt ? 'opacity-100' : '')}
+                        className={classNames(styles.iconsbg, 'transition-all', enhancingPrompt ? 'opacity-100' : '')}
                         onClick={() => {
                           enhancePrompt?.();
                           toast.success('Prompt enhanced!');
                         }}
                       >
                         {enhancingPrompt ? (
-                          <div className="i-svg-spinners:90-ring-with-bg text-bolt-elements-loader-progress text-xl animate-spin"></div>
+                          <div className="i-svg-spinners:90-ring-with-bg text-white text-xl animate-spin"></div>
                         ) : (
                           <div className="i-bolt:stars text-xl"></div>
                         )}
@@ -517,7 +526,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                       {chatStarted && <ClientOnly>{() => <ExportChatButton exportChat={exportChat} />}</ClientOnly>}
                       <IconButton
                         title="Model Settings"
-                        className={classNames('transition-all flex items-center gap-1', {
+                        className={classNames('transition-all flex items-center gap-1 text-gray-100', {
                           'bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent':
                             isModelSettingsCollapsed,
                           'bg-bolt-elements-item-backgroundDefault text-bolt-elements-item-contentDefault':
