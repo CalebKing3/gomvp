@@ -22,3 +22,12 @@ body {
   // --secondary-color: rgba(138, 43, 226, var(--gradient-opacity));
   // --accent-color: rgba(180, 170, 220, var(--gradient-opacity));
 }
+*::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #FFDE59;
+  border-radius: 3px;
+}

@@ -12,6 +12,8 @@ import { HistoryItem } from './HistoryItem';
 import { binDates } from './date-binning';
 import { useSearchFilter } from '~/lib/hooks/useSearchFilter';
 import { Header } from '../header/Header';
+import { useStore } from '@nanostores/react';
+import { workbenchStore, type WorkbenchViewType } from '~/lib/stores/workbench';
 
 const menuVariants = {
   closed: {
@@ -67,6 +69,10 @@ export const Menu = () => {
     items: list,
     searchFields: ['description'],
   });
+
+
+  const showWorkbench = useStore(workbenchStore.showWorkbench);
+
 
   const loadEntries = useCallback(() => {
     if (db) {
@@ -138,28 +144,83 @@ export const Menu = () => {
     loadEntries(); // Reload the list after duplication
   };
 
+  const handlebaropening = () => {
+    if (!showWorkbench && open) {
+      return 'open'
+    }
+    else if (showWorkbench && !open) {
+      return 'closed'
+    }
+    else if (showWorkbench && open) {
+      return 'open'
+    }
+    return 'open'
+  }
+
+  const sidebar_array = [
+    {
+      name: 'Projects',
+      route: '//',
+      icon: 'i-ph:file-bold',
+    },
+    {
+      name: 'Templates',
+      route: '//',
+      icon: 'i-ph:codesandbox-logo-duotone',
+    },
+    {
+      name: 'Documents',
+      route: '//',
+      icon: 'i-ph:files-fill',
+      action: 'add',
+    },
+    {
+      name: 'Community',
+      route: '//',
+      icon: 'i-ph:person-simple-circle-light',
+      badge: 'NEW',
+    },
+    {
+      name: 'History',
+      route: '//',
+      icon: 'i-ph:arrows-counter-clockwise-bold',
+    },
+    {
+      name: 'Settings',
+      route: '//',
+      icon: 'i-ph:gear-bold',
+    },
+    {
+      name: 'Help',
+      route: '//',
+      icon: 'i-ph:question-bold',
+    },
+  ];
+
+
   return (
     <motion.div
       ref={menuRef}
-      animate={'open'}
+      initial="open"
+      animate={handlebaropening()}
       variants={menuVariants}
-      style={{backgroundColor : 'black', borderRight: '1px solid #FFDE59'}}
-      className="flex selection-accent flex-col side-menu fixed top-0 w-[25%] h-full bg-bolt-elements-background-depth-2 border-bolt-elements-borderColor z-sidebar shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
+      className="flex selection-accent p-1.5 z-20 flex-col side-menu fixed top-0 h-full bg-black border-r-[1px] border-r-yellow shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
     >
-      <div className="h-[60px]" /> {/* Spacer for top margin */}
+      <Header />
+      <div className="h-[40px]" /> {/* Spacer for top margin */}
       <CurrentDateTime />
       <div className="flex-1 flex flex-col h-full w-full overflow-hidden">
         <div className="p-4 select-none">
           <a
             href="/"
-            className="flex gap-2 items-center bg-[#2c2710] text-[#FFDE59] font-medium hover:bg-[#53491d] rounded-md p-3 transition-theme mb-4"
+            className="flex gap-2 items-center bg-yellow-600 text-yellow font-medium hover:bg-yellow-700 rounded-md p-3 transition-theme mb-4"
           >
             <span className="inline-block i-bolt:chat scale-110" />
             Start new chat
           </a>
           <div className="relative w-full">
             <input
-              className="w-full bg-[#424242] dark:bg-bolt-elements-background-depth-4 relative px-2 py-2 rounded-md  placeholder-bolt-elements-textTertiary text-gray-400 dark:text-bolt-elements-textPrimary border border-bolt-elements-borderColor"
+              className="w-full bg-darkgray-500 dark:bg-bolt-elements-background-depth-4 relative px-2 py-2 rounded-md  placeholder-bolt-elements-textTertiary text-gray-400 dark:text-bolt-elements-textPrimary border border-bolt-elements-borderColor"
               type="search"
               placeholder="Search"
               onChange={handleSearchChange}
@@ -167,7 +228,7 @@ export const Menu = () => {
             />
           </div>
         </div>
-        <div className="font-bold text-[2rem] pl-6 pr-5 mt-2 mb-4 text-[#424242]">Your Chats</div>
+        {/* <div className="font-bold text-[2rem] pl-6 pr-5 mt-2 mb-4 text-[#424242]">Your Chats</div>
         <div className="flex-1 overflow-auto pl-4 pr-5 pb-5">
           {filteredList.length === 0 && (
             <div className="pl-2 text-bolt-elements-textTertiary">
@@ -221,10 +282,28 @@ export const Menu = () => {
               )}
             </Dialog>
           </DialogRoot>
+        </div> */}
+        <div className='overflow-auto'>
+          {sidebar_array.map((items, i) => (
+            <div key={i} className="flex items-center gap-2 py-2 px-4 text-white hover:text-yellow hover:cursor-pointer">
+              <div className={`${items.icon} w-6 h-6`} />
+              <span className='text-md font-semibold ml-2'>{items.name}</span>
+              {items.badge && (
+                <span className="bg-blue-500 text-xs px-2 py-0.5 rounded ml-2">
+                  {items.badge}
+                </span>
+              )}
+            </div>
+          ))}
         </div>
         <div className="flex items-center justify-between border-t border-bolt-elements-borderColor p-4">
-          <SettingsButton onClick={() => setIsSettingsOpen(true)} />
-          <ThemeSwitch />
+          {/* <SettingsButton onClick={() => setIsSettingsOpen(true)} /> */}
+          {/* <ThemeSwitch /> */}
+          <div className='i-ph:user-circle-fill w-10 h-10 text-white' />
+          <div className='text-white'>
+            <div className='font-semibold text-lg'>Test_User</div>
+            <div className='text-darkgray-500'>testuser@gmail.com</div>
+          </div>
         </div>
       </div>
       <SettingsWindow open={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />

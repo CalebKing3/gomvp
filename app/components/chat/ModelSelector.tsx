@@ -70,7 +70,7 @@ export const ModelSelector = ({
             setModel(firstModel.name);
           }
         }}
-        className="flex-1 p-2 rounded-lg border border-bolt-elements-borderColor bg-[#424242] text-gray-400 focus:outline-none  transition-all"
+        className="flex-1 p-2 rounded-lg border border-bolt-elements-borderColor bg-darkgray-500 text-gray-400 focus:outline-none  transition-all"
       >
         {providerList.map((provider: ProviderInfo) => (
           <option key={provider.name} value={provider.name}>
@@ -82,7 +82,7 @@ export const ModelSelector = ({
         key={provider?.name}
         value={model}
         onChange={(e) => setModel?.(e.target.value)}
-        className="flex-1 p-2 rounded-lg border border-bolt-elements-borderColor bg-[#424242] text-gray-400 focus:outline-none focus:ring-2 focus:ring-bolt-elements-focus transition-all lg:max-w-[70%]"
+        className="flex-1 p-2 rounded-lg border border-bolt-elements-borderColor bg-darkgray-500 text-gray-400 focus:outline-none focus:ring-2 focus:ring-bolt-elements-focus transition-all lg:max-w-[70%]"
       >
         {[...modelList]
           .filter((e) => e.provider == provider?.name && e.name)

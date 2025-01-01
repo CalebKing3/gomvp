@@ -28,6 +28,7 @@ import { SpeechRecognitionButton } from '~/components/chat/SpeechRecognition';
 import type { IProviderSetting, ProviderInfo } from '~/types/model';
 import { ScreenshotStateManager } from './ScreenshotStateManager';
 import { toast } from 'react-toastify';
+import { Header } from '../header/Header';
 
 const TEXTAREA_MIN_HEIGHT = 76;
 
@@ -76,6 +77,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       providerList,
       input = '',
       enhancingPrompt,
+
       handleInputChange,
 
       // promptEnhanced,
@@ -283,20 +285,20 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     const baseChat = (
       <div
         ref={ref}
-        className={classNames(styles.BaseChat,styles.BasechatBackground, 'relative flex h-full w-full overflow-hidden')}
+        className={classNames(styles.BaseChat, styles.BasechatBackground, 'grid grid-cols-[1fr_2fr_1fr] justify-evenly gap-0 h-full w-full overflow-hidden')}
         data-chat-visible={showChat}
       >
-        <div className='w-[20%]'>
-        <ClientOnly>{() => <Menu />}</ClientOnly>
+        <div className='block'>
+          <ClientOnly>{() => <Menu />}</ClientOnly>
         </div>
-        <div ref={scrollRef} className="flex flex-col lg:flex-row overflow-y-auto w-[80%] h-full">
+        <div ref={scrollRef} className="flex flex-col lg:flex-row overflow-y-auto h-full">
           {/* <div className='abdolute left-0 bottom-0  w-10 h-10 bg-red'/> */}
-          <div className={classNames(styles.Chat, 'flex flex-col flex-grow w-[70%] h-full')}>
+          <div className={classNames(styles.Chat, 'flex flex-col justify-center flex-grow h-full')}>
             <div
               className={classNames('pt-6 px-2 sm:px-6'
-              , {
-                'h-full flex flex-col item-center': chatStarted,
-              }
+                , {
+                  'h-full flex flex-col item-center': chatStarted,
+                }
               )}
             >
 
@@ -313,7 +315,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 }}
               </ClientOnly>
               <div
-                className={classNames(styles.bgboltelementsinputbackground,styles.boltelementsmainColor,
+                className={classNames(styles.bgboltelementsinputbackground, styles.boltelementsmainColor,
                   'p-3 rounded-lg border relative w-full max-w-chat mx-auto z-prompt mb-6',
                   {
                     'sticky bottom-2': chatStarted,
@@ -321,11 +323,11 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 )}
               >
                 <div className='flex justify-center'>
-                <img src="/2.svg" alt="" className='w-[70px]'/>
+                  <img src="/2.svg" alt="" className='w-[70px]' />
                 </div>
                 {!chatStarted && (
                   <div id="intro" className="max-w-chat mx-10 text-center px-4 lg:px-0">
-                    <h1 className="text-xl lg:text-5xl font-bold text-bolt-elements-textPrimary mb-2 animate-fade-in text-white">
+                    <h1 className="text-xl lg:text-5xl font-bold text-gray-100 mb-2 animate-fade-in text-white">
                       Where ideas begin
                     </h1>
                     <p className="text-md mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200 text-gray-400">
@@ -388,8 +390,8 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   files={uploadedFiles}
                   imageDataList={imageDataList}
                   onRemove={(index) => {
-                  setUploadedFiles?.(uploadedFiles.filter((_, i) => i !== index));
-                  setImageDataList?.(imageDataList.filter((_, i) => i !== index));
+                    setUploadedFiles?.(uploadedFiles.filter((_, i) => i !== index));
+                    setImageDataList?.(imageDataList.filter((_, i) => i !== index));
                   }}
                 />
                 <ClientOnly>
@@ -556,18 +558,17 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 <GitCloneButton importChat={importChat} />
               </div>
             )}
-            {!chatStarted &&
-              ExamplePrompts((event, messageInput) => {
-                if (isStreaming) {
-                  handleStop?.();
-                  return;
-                }
-
-                handleSendMessage?.(event, messageInput);
-              })}
           </div>
-          <ClientOnly>{() => <Workbench chatStarted={chatStarted} isStreaming={isStreaming} />}</ClientOnly>
         </div>
+        {!chatStarted &&
+          ExamplePrompts((event, messageInput) => {
+            if (isStreaming) {
+              handleStop?.();
+              return;
+            }
+            handleSendMessage?.(event, messageInput);
+          })}
+        <ClientOnly>{() => <Workbench chatStarted={chatStarted} isStreaming={isStreaming} />}</ClientOnly>
       </div>
     );
 

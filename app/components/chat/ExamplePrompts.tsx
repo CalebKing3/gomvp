@@ -10,9 +10,9 @@ const EXAMPLE_PROMPTS = [
 
 export function ExamplePrompts(sendMessage?: { (event: React.UIEvent, messageInput?: string): void | undefined }) {
   return (
-    <div id="examples" className="relative flex flex-col gap-9 w-full max-w-3xl mx-auto flex justify-center mt-6">
+    <div id="example" className="relative flex flex-col justify-center gap-9 mx-auto mt-6">
       <div
-        className="flex flex-wrap justify-center gap-2"
+        className="flex flex-col justify-center gap-6"
         style={{
           animation: '.25s ease-out 0s 1 _fade-and-move-in_g2ptj_1 forwards',
         }}
@@ -24,7 +24,7 @@ export function ExamplePrompts(sendMessage?: { (event: React.UIEvent, messageInp
               onClick={(event) => {
                 sendMessage?.(event, examplePrompt.text);
               }}
-              className="border border-bolt-elements-borderColor rounded-full bg-[#424242] hover:bg-gray-100 dark:bg-gray-950 dark:hover:bg-gray-900 text-gray-400 hover:text-bolt-elements-textPrimary px-3 py-1 text-xs transition-theme "
+              className="border-[1px] border-yellow z-30 rounded-full bg-darkgray-500 hover:bg-gray-100 dark:bg-gray-950 text-gray-400 hover:text-darkgray px-3 py-3 text-xs transition-theme "
             >
               {examplePrompt.text}
             </button>
