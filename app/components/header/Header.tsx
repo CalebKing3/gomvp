@@ -13,7 +13,7 @@ export function Header() {
     <header
       className={classNames('absolute text-white z-50 flex items-center p-5 border-b h-[var(--header-height)] backdrop-blur-20', {
         'border-transparent': !chat.started,
-        'border-bolt-elements-borderColor': chat.started,
+        'border-bolt-elements-borderColor w-full': chat.started,
       })}
     >
       <div className="flex items-center gap-2 z-logo text-bolt-elements-textPrimary cursor-pointer">

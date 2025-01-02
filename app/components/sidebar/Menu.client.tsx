@@ -204,10 +204,9 @@ export const Menu = () => {
       initial="open"
       animate={handlebaropening()}
       variants={menuVariants}
-      className="flex selection-accent p-1.5 z-20 flex-col side-menu fixed top-0 h-full bg-black border-r-[1px] border-r-yellow shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
+      className="flex selection-accent p-1.5 z-20 flex-col side-menu w-full max-w-[300px] h-full bg-black border-r-[1px] border-r-yellow shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
     >
-      <Header />
-      <div className="h-[40px]" /> {/* Spacer for top margin */}
+      <div className="h-[40px] " /> {/* Spacer for top margin */}
       <CurrentDateTime />
       <div className="flex-1 flex flex-col h-full w-full overflow-hidden">
         <div className="p-4 select-none">
@@ -283,20 +282,20 @@ export const Menu = () => {
             </Dialog>
           </DialogRoot>
         </div> */}
-        <div className='overflow-auto'>
+        <div className='overflow-y-auto flex flex-col gap-3'>
           {sidebar_array.map((items, i) => (
-            <div key={i} className="flex items-center gap-2 py-2 px-4 text-white hover:text-yellow hover:cursor-pointer">
+            <div key={i} className="flex items-center gap-6 py-2 px-4 text-white hover:text-yellow hover:cursor-pointer">
               <div className={`${items.icon} w-6 h-6`} />
-              <span className='text-md font-semibold ml-2'>{items.name}</span>
+              <span className='text-md 2xl:text-xl font-normal ml-2'>{items.name}</span>
               {items.badge && (
-                <span className="bg-blue-500 text-xs px-2 py-0.5 rounded ml-2">
+                <span className="bg-blue-500 text-sm  rounded ml-2">
                   {items.badge}
                 </span>
               )}
             </div>
           ))}
         </div>
-        <div className="flex items-center justify-between border-t border-bolt-elements-borderColor p-4">
+        <div className="flex items-center gap-6 border-t border-bolt-elements-borderColor p-4 absolute bottom-0">
           {/* <SettingsButton onClick={() => setIsSettingsOpen(true)} /> */}
           {/* <ThemeSwitch /> */}
           <div className='i-ph:user-circle-fill w-10 h-10 text-white' />

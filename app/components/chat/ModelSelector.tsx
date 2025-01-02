@@ -1,6 +1,6 @@
 import type { ProviderInfo } from '~/types/model';
 import type { ModelInfo } from '~/utils/types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ModelSelectorProps {
   model?: string;
@@ -22,6 +22,7 @@ export const ModelSelector = ({
 }: ModelSelectorProps) => {
   // Load enabled providers from cookies
 
+  const [aiModel, setaiModel] = useState('Anthropy');
   // Update enabled providers when cookies change
   useEffect(() => {
     // If current provider is disabled, switch to first enabled provider
@@ -53,9 +54,15 @@ export const ModelSelector = ({
     );
   }
 
+
   return (
-    <div className="mb-2 flex gap-2 flex-col sm:flex-row">
-      <select
+    <div className="mb-2 flex gap-2 flex-row justify-evenly items-center">
+
+      <div className={`rounded-lg text-center cursor-pointer ${aiModel === 'Anthropy' ? 'text-yellow bg-yellow-600 py-2 px-6' : 'bg-gray-600 text-lightgray-500 p-2'}`} onClick={()=>setaiModel('Anthropy')}>Anthropy</div>
+      <div className='i-ph:arrows-left-right-thin text-white text-2xl' />
+      <div className={`rounded-lg text-center cursor-pointer ${aiModel === 'Ollama' ? 'text-yellow bg-yellow-600 py-2 px-10' : 'bg-gray-600 text-lightgray-500 p-2'}`} onClick={()=>setaiModel('Ollama')}>Ollama</div>
+
+      {/* <select
         value={provider?.name ?? ''}
         onChange={(e) => {
           const newProvider = providerList.find((p: ProviderInfo) => p.name === e.target.value);
@@ -77,8 +84,10 @@ export const ModelSelector = ({
             {provider.name}
           </option>
         ))}
-      </select>
-      <select
+      </select> */}
+
+
+      {/* <select
         key={provider?.name}
         value={model}
         onChange={(e) => setModel?.(e.target.value)}
@@ -91,7 +100,7 @@ export const ModelSelector = ({
               {modelOption.label}
             </option>
           ))}
-      </select>
+      </select> */}
     </div>
   );
 };

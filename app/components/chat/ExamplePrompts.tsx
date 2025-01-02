@@ -5,12 +5,12 @@ const EXAMPLE_PROMPTS = [
   { text: 'Build a simple blog using Astro' },
   { text: 'Create a cookie consent form using Material UI' },
   { text: 'Make a space invaders game' },
-  { text: 'Make a Tic Tac Toe game in html, css and js only' },
+  { text: 'Make a Tic Tac Toe game in html, css and js' },
 ];
 
 export function ExamplePrompts(sendMessage?: { (event: React.UIEvent, messageInput?: string): void | undefined }) {
   return (
-    <div id="example" className="relative flex flex-col justify-center gap-9 mx-auto mt-6">
+    <div id="examples" className="relative flex flex-col justify-center gap-9 mx-auto mt-6">
       <div
         className="flex flex-col justify-center gap-6"
         style={{
@@ -24,7 +24,7 @@ export function ExamplePrompts(sendMessage?: { (event: React.UIEvent, messageInp
               onClick={(event) => {
                 sendMessage?.(event, examplePrompt.text);
               }}
-              className="border-[1px] border-yellow z-30 rounded-full bg-darkgray-500 hover:bg-gray-100 dark:bg-gray-950 text-gray-400 hover:text-darkgray px-3 py-3 text-xs transition-theme "
+              className="border-[1px] border-yellow z-30 rounded-full bg-lightgray-500 hover:bg-gray-100 text-gray-400 hover:text-darkgray p-3 text-md transition-theme "
             >
               {examplePrompt.text}
             </button>

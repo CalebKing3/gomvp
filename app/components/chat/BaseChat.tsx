@@ -291,13 +291,14 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
         <div className='block'>
           <ClientOnly>{() => <Menu />}</ClientOnly>
         </div>
+        
         <div ref={scrollRef} className="flex flex-col lg:flex-row overflow-y-auto h-full">
           {/* <div className='abdolute left-0 bottom-0  w-10 h-10 bg-red'/> */}
           <div className={classNames(styles.Chat, 'flex flex-col justify-center flex-grow h-full')}>
             <div
-              className={classNames('pt-6 px-2 sm:px-6'
+              className={classNames('pt-6 px-2 sm:px-6 flex flex-col gap-10'
                 , {
-                  'h-full flex flex-col item-center': chatStarted,
+                  'h-full flex flex-colitem-center': chatStarted,
                 }
               )}
             >
@@ -316,7 +317,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               </ClientOnly>
               <div
                 className={classNames(styles.bgboltelementsinputbackground, styles.boltelementsmainColor,
-                  'p-3 rounded-lg border relative w-full max-w-chat mx-auto z-prompt mb-6',
+                  'p-3 rounded-lg border relative w-full max-w-chat mx-auto z-prompt mb-6 flex flex-col lg:gap-8',
                   {
                     'sticky bottom-2': chatStarted,
                   },
