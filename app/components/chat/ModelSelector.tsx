@@ -58,9 +58,9 @@ export const ModelSelector = ({
   return (
     <div className="mb-2 flex gap-2 flex-row justify-evenly items-center">
 
-      <div className={`rounded-lg text-center cursor-pointer ${aiModel === 'Anthropy' ? 'text-yellow bg-yellow-600 py-2 px-6' : 'bg-gray-600 text-lightgray-500 p-2'}`} onClick={()=>setaiModel('Anthropy')}>Anthropy</div>
-      <div className='i-ph:arrows-left-right-thin text-white text-2xl' />
-      <div className={`rounded-lg text-center cursor-pointer ${aiModel === 'Ollama' ? 'text-yellow bg-yellow-600 py-2 px-10' : 'bg-gray-600 text-lightgray-500 p-2'}`} onClick={()=>setaiModel('Ollama')}>Ollama</div>
+      <div className={`rounded-lg text-center cursor-pointer py-2 px-4 ${aiModel === 'Anthropy' ? 'text-yellow bg-yellow-600' : 'bg-gray-600 text-lightgray-500'}`} onClick={()=>setaiModel('Anthropy')}>Anthropy</div>
+      <div className={`i-ph:arrows-left-right-thin text-white text-2xl duration-100 ${aiModel === 'Anthropy' ? 'rotate-180' : 'rotate-0'}`} />
+      <div className={`rounded-lg text-center cursor-pointer py-2 px-6 ${aiModel === 'Ollama' ? 'text-yellow bg-yellow-600 py-2 px-10' : 'bg-gray-600 text-lightgray-500'}`} onClick={()=>setaiModel('Ollama')}>Ollama</div>
 
       {/* <select
         value={provider?.name ?? ''}

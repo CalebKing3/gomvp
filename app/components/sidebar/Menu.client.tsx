@@ -186,6 +186,11 @@ export const Menu = () => {
       icon: 'i-ph:arrows-counter-clockwise-bold',
     },
     {
+      name: 'History',
+      route: '//',
+      icon: 'i-ph:arrows-counter-clockwise-bold',
+    },
+    {
       name: 'Settings',
       route: '//',
       icon: 'i-ph:gear-bold',
@@ -194,7 +199,7 @@ export const Menu = () => {
       name: 'Help',
       route: '//',
       icon: 'i-ph:question-bold',
-    },
+    }
   ];
 
 
@@ -204,7 +209,7 @@ export const Menu = () => {
       initial="open"
       animate={handlebaropening()}
       variants={menuVariants}
-      className="flex selection-accent p-1.5 z-20 flex-col side-menu w-full max-w-[300px] h-full bg-black border-r-[1px] border-r-yellow shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
+      className="flex selection-accent p-1.5 z-20 !h-[100vh] flex-col side-menu w-full max-w-[300px] h-full bg-black border-r-[1px] border-r-yellow shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
     >
       <div className="h-[40px] " /> {/* Spacer for top margin */}
       <CurrentDateTime />
@@ -295,6 +300,8 @@ export const Menu = () => {
             </div>
           ))}
         </div>
+        <div> 
+          <div className='p-10'/>
         <div className="flex items-center gap-6 border-t border-bolt-elements-borderColor p-4 absolute bottom-0">
           {/* <SettingsButton onClick={() => setIsSettingsOpen(true)} /> */}
           {/* <ThemeSwitch /> */}
@@ -303,6 +310,7 @@ export const Menu = () => {
             <div className='font-semibold text-lg'>Test_User</div>
             <div className='text-darkgray-500'>testuser@gmail.com</div>
           </div>
+        </div>
         </div>
       </div>
       <SettingsWindow open={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />

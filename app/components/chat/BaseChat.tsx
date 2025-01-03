@@ -285,14 +285,14 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     const baseChat = (
       <div
         ref={ref}
-        className={classNames(styles.BaseChat, styles.BasechatBackground, 'grid grid-cols-[1fr_2fr_1fr] justify-evenly gap-0 h-full w-full overflow-hidden')}
+        className={classNames(styles.BaseChat, styles.BasechatBackground, 'grid lg:grid-cols-[1fr_2fr_1fr]  justify-betwween gap-0 h-full w-full lg:overflow-hidden overflow-auto')}
         data-chat-visible={showChat}
       >
         <div className='block'>
           <ClientOnly>{() => <Menu />}</ClientOnly>
         </div>
         
-        <div ref={scrollRef} className="flex flex-col lg:flex-row overflow-y-auto h-full">
+        <div ref={scrollRef} className="flex flex-col lg:flex-row h-full">
           {/* <div className='abdolute left-0 bottom-0  w-10 h-10 bg-red'/> */}
           <div className={classNames(styles.Chat, 'flex flex-col justify-center flex-grow h-full')}>
             <div
@@ -317,7 +317,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               </ClientOnly>
               <div
                 className={classNames(styles.bgboltelementsinputbackground, styles.boltelementsmainColor,
-                  'p-3 rounded-lg border relative w-full max-w-chat mx-auto z-prompt mb-6 flex flex-col lg:gap-8',
+                  'p-3 rounded-lg border relative w-full xl:max-w-chat lg:max-w-[35rem] mx-auto z-prompt mb-6 flex flex-col !gap-4 md:max-w-[33rem]',
                   {
                     'sticky bottom-2': chatStarted,
                   },
@@ -327,11 +327,11 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   <img src="/2.svg" alt="" className='w-[70px]' />
                 </div>
                 {!chatStarted && (
-                  <div id="intro" className="max-w-chat mx-10 text-center px-4 lg:px-0">
-                    <h1 className="text-xl lg:text-5xl font-bold text-gray-100 mb-2 animate-fade-in text-white">
+                  <div id="intro" className="max-w-chat mx-8 text-center lg:px-0">
+                    <h1 className="text-xl lg:text-4xl font-bold text-gray-100 mb-2 animate-fade-in text-white">
                       Where ideas begin
                     </h1>
-                    <p className="text-md mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200 text-gray-400">
+                    <p className="text-md text-bolt-elements-textSecondary animate-fade-in animation-delay-200 text-gray-400">
                       Bring ideas to life in seconds or get help on existing projects.
                     </p>
                   </div>
@@ -374,7 +374,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                       providerList={providerList || PROVIDER_LIST}
                       apiKeys={apiKeys}
                     />
-                    {(providerList || []).length > 0 && provider && (
+                    {/* {(providerList || []).length > 0 && provider && (
                       <APIKeyManager
                         provider={provider}
                         apiKey={apiKeys[provider.name] || ''}
@@ -384,7 +384,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                           Cookies.set('apiKeys', JSON.stringify(newApiKeys));
                         }}
                       />
-                    )}
+                    )} */}
                   </div>
                 </div>
                 <FilePreview
