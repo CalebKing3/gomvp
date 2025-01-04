@@ -59,6 +59,7 @@ interface BaseChatProps {
   setUploadedFiles?: (files: File[]) => void;
   imageDataList?: string[];
   setImageDataList?: (dataList: string[]) => void;
+  showWorkbench?: boolean;
 }
 
 export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
@@ -77,7 +78,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       providerList,
       input = '',
       enhancingPrompt,
-
+      showWorkbench,
       handleInputChange,
 
       // promptEnhanced,
@@ -285,10 +286,10 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     const baseChat = (
       <div
         ref={ref}
-        className={classNames(styles.BaseChat, styles.BasechatBackground, 'grid lg:grid-cols-[1fr_2fr_1fr]  justify-betwween gap-0 h-full w-full lg:overflow-hidden overflow-auto')}
+        className={classNames(styles.BaseChat, styles.BasechatBackground, `${showWorkbench ? 'flex flex-row' : 'grid lg:grid-cols-[1fr_2fr_1fr]'} justify-between gap-0 h-full w-full lg:overflow-hidden overflow-auto`)}
         data-chat-visible={showChat}
       >
-        <div className='block'>
+        <div className={`${showWorkbench ? 'absolute' : 'block'}`}>
           <ClientOnly>{() => <Menu />}</ClientOnly>
         </div>
         
@@ -296,9 +297,9 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
           {/* <div className='abdolute left-0 bottom-0  w-10 h-10 bg-red'/> */}
           <div className={classNames(styles.Chat, 'flex flex-col justify-center flex-grow h-full')}>
             <div
-              className={classNames('pt-6 px-2 sm:px-6 flex flex-col gap-10'
+              className={classNames('pt-6 px-2 sm:px-6 flex flex-col gap-10 overflow-y-auto'
                 , {
-                  'h-full flex flex-colitem-center': chatStarted,
+                  'h-full flex flex-col item-center': chatStarted,
                 }
               )}
             >
@@ -317,7 +318,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               </ClientOnly>
               <div
                 className={classNames(styles.bgboltelementsinputbackground, styles.boltelementsmainColor,
-                  'p-3 rounded-lg border relative w-full xl:max-w-chat lg:max-w-[35rem] mx-auto z-prompt mb-6 flex flex-col !gap-4 md:max-w-[33rem]',
+                  'p-3 rounded-lg border relative w-full xl:max-w-chat lg:max-w-[35rem] mx-auto z-prompt mb-6 flex flex-col !gap-4 md:max-w-[33rem] z-50',
                   {
                     'sticky bottom-2': chatStarted,
                   },
