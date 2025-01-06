@@ -286,7 +286,10 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     const baseChat = (
       <div
         ref={ref}
-        className={classNames(styles.BaseChat, styles.BasechatBackground, `${showWorkbench ? 'flex flex-row' : 'grid lg:grid-cols-[1fr_2fr_1fr]'} justify-between gap-0 h-full w-full lg:overflow-hidden overflow-auto`)}
+        className={classNames(styles.BaseChat, styles.BasechatBackground, `${showWorkbench ? 'flex flex-row' : 'grid lg:grid-cols-[1fr_2fr_1fr]'} justify-between gap-0 h-full w-full overflow-y-auto overflow-x-hidden`,
+          
+            '!sm:grid !sm:grid-row-2'
+        )}
         data-chat-visible={showChat}
       >
         <div className={`${showWorkbench ? 'absolute' : 'block'}`}>
@@ -318,7 +321,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               </ClientOnly>
               <div
                 className={classNames(styles.bgboltelementsinputbackground, styles.boltelementsmainColor,
-                  'p-3 rounded-lg border relative w-full xl:max-w-chat lg:max-w-[35rem] mx-auto z-prompt mb-6 flex flex-col !gap-4 md:max-w-[33rem] z-50',
+                  'p-3 rounded-lg border relative w-full xl:max-w-chat lg:max-w-[35rem] mx-auto z-prompt mb-6 flex flex-col !gap-4 md:max-w-[33rem] z-20 mt-10',
                   {
                     'sticky bottom-2': chatStarted,
                   },

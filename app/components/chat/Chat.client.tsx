@@ -337,6 +337,11 @@ export const ChatImpl = memo(
       Cookies.set('selectedProvider', newProvider.name, { expires: 30 });
     };
 
+
+    useEffect(() => {
+      console.log('Provider_Model', provider, model);
+    }, [provider, model]);
+    
     return (
       <BaseChat
         ref={animationScope}
