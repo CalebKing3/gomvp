@@ -22,7 +22,7 @@ export const ModelSelector = ({
 }: ModelSelectorProps) => {
   // Load enabled providers from cookies
 
-  const [aiModel, setaiModel] = useState('Anthropy');
+  const [aiModel, setaiModel] = useState('Groq');
   // Update enabled providers when cookies change
   useEffect(() => {
     // If current provider is disabled, switch to first enabled provider
@@ -54,14 +54,44 @@ export const ModelSelector = ({
     );
   }
 
+  const handleFirstInput = () => {
+    setaiModel('Groq');
 
+    const newProvider = providerList.find((p: ProviderInfo) => p.name === 'Groq');
+
+    if (newProvider && setProvider) {
+      setProvider(newProvider);
+    }
+
+    const firstModel = [...modelList].find((m) => m.provider === 'Groq');
+
+    if (firstModel && setModel) {
+      setModel(firstModel.name);
+    }
+  }
+
+  const handleSecondInput = () =>{
+    setaiModel('Ollama');
+
+    const newProvider = providerList.find((p: ProviderInfo) => p.name === 'Ollama');
+
+    if (newProvider && setProvider) {
+      setProvider(newProvider);
+    }
+
+    const firstModel = [...modelList].find((m) => m.provider === 'Ollama');
+
+    if (firstModel && setModel) {
+      setModel(firstModel.name);
+    }
+  }
 
   return (
     <div className="mb-2 flex gap-2 flex-row justify-evenly items-center">
 
-      <div className={`rounded-lg text-center cursor-pointer py-2 px-4 ${aiModel === 'Groq' ? 'text-yellow bg-yellow-600' : 'bg-gray-600 text-lightgray-500'}`} onClick={()=>setaiModel('Groq')}>Groq</div>
+      <div className={`rounded-lg text-center cursor-pointer py-2 px-8 ${aiModel === 'Groq' ? 'text-yellow bg-yellow-600' : 'bg-gray-600 text-lightgray-500'}`} onClick={handleFirstInput}>Groq</div>
       <div className={`i-ph:arrows-left-right-thin text-white text-2xl duration-100 ${aiModel === 'Anthropy' ? 'rotate-180' : 'rotate-0'}`} />
-      <div className={`rounded-lg text-center cursor-pointer py-2 px-6 ${aiModel === 'Ollama' ? 'text-yellow bg-yellow-600 py-2 px-10' : 'bg-gray-600 text-lightgray-500'}`} onClick={()=>setaiModel('Ollama')}>Ollama</div>
+      <div className={`rounded-lg text-center cursor-pointer py-2 px-6 ${aiModel === 'Ollama' ? 'text-yellow bg-yellow-600 py-2 px-10' : 'bg-gray-600 text-lightgray-500'}`} onClick={handleSecondInput}>Ollama</div>
 
       {/* <select
         value={provider?.name ?? ''}

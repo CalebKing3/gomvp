@@ -100,12 +100,12 @@ export const ChatImpl = memo(
     const { activeProviders, promptId } = useSettings();
 
     const [model, setModel] = useState(() => {
-      // const savedModel = Cookies.get('selectedModel');
-      return  DEFAULT_MODEL;
+      const savedModel = Cookies.get('selectedModel');
+      return savedModel || DEFAULT_MODEL;
     });
     const [provider, setProvider] = useState(() => {
-      // const savedProvider = Cookies.get('selectedProvider');
-      return  DEFAULT_PROVIDER;
+      const savedProvider = Cookies.get('selectedProvider');
+      return PROVIDER_LIST.find((p) => p.name === savedProvider) || DEFAULT_PROVIDER;
     });
 
     const { showChat } = useStore(chatStore);
