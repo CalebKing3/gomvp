@@ -215,9 +215,6 @@ export const Menu = () => {
 
   return (
     <>
-    <div onClick={handleMenu}>
-        <Header />
-      </div>
     <motion.div
       ref={menuRef}
       initial="open"
@@ -225,7 +222,7 @@ export const Menu = () => {
       variants={menuVariants}
       className="flex selection-accent p-1.5 fixed z-40 !h-[100vh] flex-col side-menu w-full max-w-[300px] h-full bg-black border-r-[1px] border-r-yellow shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
     >
-      
+
       <div className="h-[40px] " /> {/* Spacer for top margin */}
       <CurrentDateTime />
       <div className="flex-1 flex flex-col h-full w-full overflow-hidden">

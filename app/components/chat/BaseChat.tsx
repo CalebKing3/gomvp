@@ -12,7 +12,6 @@ import { classNames } from '~/utils/classNames';
 import { MODEL_LIST, PROVIDER_LIST, initializeModelList } from '~/utils/constants';
 import { Messages } from './Messages.client';
 import { SendButton } from './SendButton.client';
-import { APIKeyManager } from './APIKeyManager';
 import Cookies from 'js-cookie';
 import * as Tooltip from '@radix-ui/react-tooltip';
 
@@ -286,7 +285,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     const baseChat = (
       <div
         ref={ref}
-        className={classNames(styles.BaseChat, styles.BasechatBackground, `${showWorkbench ? 'flex flex-row' : 'grid lg:grid-cols-[1fr_2fr_1fr]'} justify-between gap-0 h-full w-full overflow-y-auto overflow-x-hidden`,
+        className={classNames(styles.BaseChat, styles.BasechatBackground, `${showWorkbench ? 'flex flex-row' : 'grid lg:grid-cols-[1fr_2fr_1fr]'} justify-between gap-0 h-full w-full overflow-y-auto overflow-x-hidden px-6`,
           
             '!sm:grid !sm:grid-row-2'
         )}
@@ -300,7 +299,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
           {/* <div className='abdolute left-0 bottom-0  w-10 h-10 bg-red'/> */}
           <div className={classNames(styles.Chat, 'flex flex-col justify-center flex-grow h-full')}>
             <div
-              className={classNames('pt-6 px-2 sm:px-6 flex flex-col gap-10 overflow-y-auto'
+              className={classNames('py-6 px-2 sm:px-6 flex flex-col gap-10 overflow-y-auto overflow-x-hidden'
                 , {
                   'h-full flex flex-col item-center': chatStarted,
                 }
@@ -558,7 +557,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               </div>
             </div>
             {!chatStarted && (
-              <div className="flex justify-center gap-2">
+              <div className="flex flex-wrap justify-center gap-2">
                 {ImportButtons(importChat)}
                 <GitCloneButton importChat={importChat} />
               </div>
