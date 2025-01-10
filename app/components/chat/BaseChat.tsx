@@ -285,7 +285,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     const baseChat = (
       <div
         ref={ref}
-        className={classNames(styles.BaseChat, styles.BasechatBackground, `${showWorkbench ? 'flex flex-row' : 'grid lg:grid-cols-[1fr_2fr_1fr]'} justify-between gap-0 h-full w-full overflow-y-auto overflow-x-hidden px-6`,
+        className={classNames(styles.BaseChat , `${showWorkbench ? 'flex flex-row' : 'grid lg:grid-cols-[1fr_2fr_1fr]'} justify-between gap-0 h-full w-full overflow-y-auto overflow-x-hidden px-6`,
           
             '!sm:grid !sm:grid-row-2'
         )}
@@ -295,9 +295,9 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
           <ClientOnly>{() => <Menu />}</ClientOnly>
         </div>
         
-        <div ref={scrollRef} className="flex flex-col lg:flex-row h-full">
+        <div ref={scrollRef} className="flex flex-col lg:flex-row h-full mt-12">
           {/* <div className='abdolute left-0 bottom-0  w-10 h-10 bg-red'/> */}
-          <div className={classNames(styles.Chat, 'flex flex-col justify-center flex-grow h-full')}>
+          <div className={classNames(styles.Chat, 'flex flex-col justify-center flex-grow h-[calc(100vh)-54px]')}>
             <div
               className={classNames('py-6 px-2 sm:px-6 flex flex-col gap-10 overflow-y-auto overflow-x-hidden'
                 , {
@@ -311,7 +311,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   return chatStarted ? (
                     <Messages
                       ref={messageRef}
-                      className="flex flex-col w-full flex-1 max-w-chat pb-6 mx-auto z-1"
+                      className="flex flex-col w-full flex-1 max-w-[35rem] pb-6 mx-auto z-1"
                       messages={messages}
                       isStreaming={isStreaming}
                     />
@@ -320,17 +320,17 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               </ClientOnly>
               <div
                 className={classNames(styles.bgboltelementsinputbackground, styles.boltelementsmainColor,
-                  'p-3 rounded-lg border relative w-full xl:max-w-chat lg:max-w-[35rem] mx-auto z-prompt mb-6 flex flex-col !gap-4 md:max-w-[33rem] z-20 mt-10',
+                  'p-3 rounded-lg border relative w-full max-w-[35rem] mx-auto z-prompt mb-6 flex flex-col !gap-4 z-20 mt-10',
                   {
                     'sticky bottom-2': chatStarted,
                   },
                 )}
               >
                 <div className='flex justify-center'>
-                  <img src="/2.svg" alt="" className='w-[70px]' />
+                  <img src="/gomvplogo.svg" alt="" className='w-[70px]' />
                 </div>
                 {!chatStarted && (
-                  <div id="intro" className="max-w-chat mx-8 text-center lg:px-0">
+                  <div id="intro" className="max-w-[35rem] mx-8 text-center lg:px-0">
                     <h1 className="text-xl lg:text-4xl font-bold text-gray-100 mb-2 animate-fade-in text-white">
                       Where ideas begin
                     </h1>

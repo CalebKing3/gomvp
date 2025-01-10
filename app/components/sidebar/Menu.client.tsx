@@ -14,6 +14,7 @@ import { useSearchFilter } from '~/lib/hooks/useSearchFilter';
 import { Header } from '../header/Header';
 import { useStore } from '@nanostores/react';
 import { workbenchStore, type WorkbenchViewType } from '~/lib/stores/workbench';
+import { manageHeader } from '~/lib/stores/manageheader';
 
 const menuVariants = {
   closed: {
@@ -64,7 +65,7 @@ export const Menu = () => {
   const [open, setOpen] = useState(false);
   const [dialogContent, setDialogContent] = useState<DialogContent>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-
+  const header = useStore(manageHeader)
   const { filteredItems: filteredList, handleSearchChange } = useSearchFilter({
     items: list,
     searchFields: ['description'],
@@ -145,20 +146,20 @@ export const Menu = () => {
   };
 
   const handlebaropening = () => {
-    if (((window as Window).innerWidth < 500) && open) {
+    if (((window as Window).innerWidth < 500) && header) {
       return 'closed'
     }
-    else if (((window as Window).innerWidth < 500) && !open) {
+    else if (((window as Window).innerWidth < 500) && !header) {
       return 'open'
     }
     else if(((window as Window).innerWidth > 500)){
-      if (!showWorkbench && open) {
+      if (!showWorkbench && header) {
         return 'open'
       }
-      else if (showWorkbench && !open) {
+      else if (showWorkbench && !header) {
         return 'closed'
       }
-      else if (showWorkbench && open) {
+      else if (showWorkbench && header) {
         return 'open'
       }
       return 'open'
@@ -220,7 +221,7 @@ export const Menu = () => {
       initial="open"
       animate={handlebaropening()}
       variants={menuVariants}
-      className="flex selection-accent p-1.5 fixed z-40 !h-[100vh] flex-col side-menu w-full max-w-[300px] h-full bg-black border-r-[1px] border-r-yellow shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
+      className="flex selection-accent p-1.5 fixed z-40 !h-[100vh] flex-col rounded-tr-xl rounded-br-xl side-menu w-full max-w-[300px] h-full bg-lightgray-500 border-r-[1px] border-r-yellow shadow-xl shadow-bolt-elements-sidebar-dropdownShadow text-sm"
     >
 
       <div className="h-[40px] " /> {/* Spacer for top margin */}

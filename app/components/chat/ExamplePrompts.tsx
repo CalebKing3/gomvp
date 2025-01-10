@@ -10,7 +10,7 @@ const EXAMPLE_PROMPTS = [
 
 export function ExamplePrompts(sendMessage?: { (event: React.UIEvent, messageInput?: string): void | undefined }) {
   return (
-    <div id="examples" className="relative flex flex-col justify-center gap-9 mx-auto mt-6">
+    <div id="examples" className="relative flex flex-col justify-center gap-9 mx-auto h-[calc[100vh]-54px] lg:mt-0 mt-12">
       <div
         className="flex flex-col justify-center gap-6"
         style={{
