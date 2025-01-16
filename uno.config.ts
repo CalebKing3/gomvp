@@ -85,6 +85,17 @@ const BASE_COLORS = {
     900: '#7F1D1D',
     950: '#450A0A',
   },
+  yellow: {
+    500: '#FFDE59',
+    600: '#2c2710',
+    700: '#53491d'
+  },
+  darkgray: {
+    500: '#424242'
+  },
+  lightgray: {
+    500: '#202020'
+  }
 };
 
 const COLOR_PRIMITIVES = {
@@ -94,6 +105,9 @@ const COLOR_PRIMITIVES = {
     gray: generateAlphaPalette(BASE_COLORS.gray[900]),
     red: generateAlphaPalette(BASE_COLORS.red[500]),
     accent: generateAlphaPalette(BASE_COLORS.accent[500]),
+    yellow: generateAlphaPalette(BASE_COLORS.yellow[500]),
+    darkgray: generateAlphaPalette(BASE_COLORS.darkgray[500]),
+    lightgray: generateAlphaPalette(BASE_COLORS.lightgray[500]),
   },
 };
 
@@ -225,6 +239,20 @@ export default defineConfig({
             text: 'var(--bolt-elements-cta-text)',
           },
         },
+        yellow: {
+          DEFAULT: '#FFDE59', // A shorthand for direct usage
+          500: '#FFDE59',
+          600: '#2c2710',
+          700: '#53491d'
+        },
+        darkgray: {
+          DEFAULT: '#424242',
+          500: '#424242'
+        },
+        lightgray: {
+          DEFAULT: '#202020',
+          500: '#202020'
+        }
       },
     },
   },

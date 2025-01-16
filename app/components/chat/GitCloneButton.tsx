@@ -101,7 +101,7 @@ ${file.content}
     <button
       onClick={onClick}
       title="Clone a Git Repo"
-      className="px-4 py-2 rounded-lg border border-bolt-elements-borderColor bg-bolt-elements-prompt-background text-bolt-elements-textPrimary hover:bg-bolt-elements-background-depth-3 transition-all flex items-center gap-2"
+      className="px-4 py-2 rounded-lg border border-bolt-elements-borderColor bg-yellow-600 text-yellow hover:bg-yellow-700 transition-all flex items-center gap-2"
     >
       <span className="i-ph:git-branch" />
       Clone a Git Repo

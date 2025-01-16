@@ -4,6 +4,7 @@ import { chatStore } from '~/lib/stores/chat';
 import { workbenchStore } from '~/lib/stores/workbench';
 import { classNames } from '~/utils/classNames';
 
+
 interface HeaderActionButtonsProps {}
 
 export function HeaderActionButtons({}: HeaderActionButtonsProps) {
@@ -16,7 +17,7 @@ export function HeaderActionButtons({}: HeaderActionButtonsProps) {
 
   return (
     <div className="flex">
-      <div className="flex border border-bolt-elements-borderColor rounded-md overflow-hidden">
+      <div className="flex border rounded-md overflow-hidden">
         <Button
           active={showChat}
           disabled={!canHideChat || isSmallViewport} // expand button is disabled on mobile as it's not needed
@@ -26,20 +27,19 @@ export function HeaderActionButtons({}: HeaderActionButtonsProps) {
             }
           }}
         >
-          <div className="i-bolt:chat text-sm" />
+          <div className="i-bolt:chat text-sm text-white" />
         </Button>
-        <div className="w-[1px] bg-bolt-elements-borderColor" />
+        <div className="w-[1px] bg-white" />
         <Button
-          active={showWorkbench}
+          active={!showWorkbench}
           onClick={() => {
             if (showWorkbench && !showChat) {
               chatStore.setKey('showChat', true);
             }
-
             workbenchStore.showWorkbench.set(!showWorkbench);
           }}
         >
-          <div className="i-ph:code-bold" />
+          <div className="i-ph:code-bold text-white" />
         </Button>
       </div>
     </div>

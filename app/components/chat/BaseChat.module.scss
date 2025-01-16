@@ -12,6 +12,7 @@
       opacity: 0;
     }
   }
+  
 }
 
 .Chat {
@@ -44,4 +45,34 @@
 .PromptShine {
   fill: url(#shine-gradient);
   mix-blend-mode: overlay;
+}
+
+.BasechatBackground {
+  background: 
+    radial-gradient(circle at top right, rgba(255, 222, 89, 0.5), black 25%),
+    radial-gradient(circle at bottom left, rgba(255, 222, 89, 0.5), black 70%);
+} 
+
+.bgboltelementsinputtext{
+background: #424242;
+}
+
+.iconsbg{
+  background:#6b7280;
+}
+
+.bgboltelementsinputbackground {
+  background: #202020;
+}
+.bolt-elements-inputText {
+  color: var(--bolt-elements-textColor);
+}
+
+.bolt-elements-mainColor {
+  --bolt-elements-mainColor : #FFDE59;
+  color: var(--bolt-elements-mainColor);
+}
+.boltelementsmainColor {
+  --bolt-elements-mainColor : #FFDE59;
+  border-color: var(--bolt-elements-mainColor);
 }

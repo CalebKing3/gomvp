@@ -1,6 +1,6 @@
 import type { ProviderInfo } from '~/types/model';
 import type { ModelInfo } from '~/utils/types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ModelSelectorProps {
   model?: string;
@@ -22,6 +22,7 @@ export const ModelSelector = ({
 }: ModelSelectorProps) => {
   // Load enabled providers from cookies
 
+  const [aiModel, setaiModel] = useState('Groq');
   // Update enabled providers when cookies change
   useEffect(() => {
     // If current provider is disabled, switch to first enabled provider
@@ -53,9 +54,46 @@ export const ModelSelector = ({
     );
   }
 
+  const handleFirstInput = () => {
+    setaiModel('Groq');
+
+    const newProvider = providerList.find((p: ProviderInfo) => p.name === 'Groq');
+
+    if (newProvider && setProvider) {
+      setProvider(newProvider);
+    }
+
+    const firstModel = [...modelList].find((m) => m.provider === 'Groq');
+
+    if (firstModel && setModel) {
+      setModel(firstModel.name);
+    }
+  }
+
+  const handleSecondInput = () =>{
+    setaiModel('Ollama');
+
+    const newProvider = providerList.find((p: ProviderInfo) => p.name === 'Ollama');
+
+    if (newProvider && setProvider) {
+      setProvider(newProvider);
+    }
+
+    const firstModel = [...modelList].find((m) => m.provider === 'Ollama');
+
+    if (firstModel && setModel) {
+      setModel(firstModel.name);
+    }
+  }
+
   return (
-    <div className="mb-2 flex gap-2 flex-col sm:flex-row">
-      <select
+    <div className="mb-2 flex gap-2 flex-row justify-evenly items-center">
+
+      <div className={`rounded-lg text-center cursor-pointer py-2 px-8 ${aiModel === 'Groq' ? 'text-yellow bg-yellow-600' : 'bg-gray-600 text-lightgray-500'}`} onClick={handleFirstInput}>Groq</div>
+      <div className={`i-ph:arrows-left-right-thin text-white text-2xl duration-100 ${aiModel === 'Anthropy' ? 'rotate-180' : 'rotate-0'}`} />
+      <div className={`rounded-lg text-center cursor-pointer py-2 px-6 ${aiModel === 'Ollama' ? 'text-yellow bg-yellow-600 py-2 px-10' : 'bg-gray-600 text-lightgray-500'}`} onClick={handleSecondInput}>Ollama</div>
+
+      {/* <select
         value={provider?.name ?? ''}
         onChange={(e) => {
           const newProvider = providerList.find((p: ProviderInfo) => p.name === e.target.value);
@@ -70,19 +108,21 @@ export const ModelSelector = ({
             setModel(firstModel.name);
           }
         }}
-        className="flex-1 p-2 rounded-lg border border-bolt-elements-borderColor bg-bolt-elements-prompt-background text-bolt-elements-textPrimary focus:outline-none focus:ring-2 focus:ring-bolt-elements-focus transition-all"
+        className="flex-1 p-2 rounded-lg border border-bolt-elements-borderColor bg-darkgray-500 text-gray-400 focus:outline-none  transition-all"
       >
         {providerList.map((provider: ProviderInfo) => (
           <option key={provider.name} value={provider.name}>
             {provider.name}
           </option>
         ))}
-      </select>
-      <select
+      </select> */}
+
+
+      {/* <select
         key={provider?.name}
         value={model}
         onChange={(e) => setModel?.(e.target.value)}
-        className="flex-1 p-2 rounded-lg border border-bolt-elements-borderColor bg-bolt-elements-prompt-background text-bolt-elements-textPrimary focus:outline-none focus:ring-2 focus:ring-bolt-elements-focus transition-all lg:max-w-[70%]"
+        className="flex-1 p-2 rounded-lg border border-bolt-elements-borderColor bg-darkgray-500 text-gray-400 focus:outline-none focus:ring-2 focus:ring-bolt-elements-focus transition-all lg:max-w-[70%]"
       >
         {[...modelList]
           .filter((e) => e.provider == provider?.name && e.name)
@@ -91,7 +131,7 @@ export const ModelSelector = ({
               {modelOption.label}
             </option>
           ))}
-      </select>
+      </select> */}
     </div>
   );
 };
