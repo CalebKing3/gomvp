@@ -6,7 +6,7 @@ import { themeStore } from './lib/stores/theme';
 import { stripIndents } from './utils/stripIndent';
 import { createHead } from 'remix-island';
 import { useEffect } from 'react';
-
+import { AuthProvider } from 'react-oidc-context'
 import reactToastifyStyles from 'react-toastify/dist/ReactToastify.css?url';
 import globalStyles from './styles/index.scss?url';
 import xtermStyles from '@xterm/xterm/css/xterm.css?url';
@@ -78,6 +78,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+const cognitoAuthConfig = {
+  authority: "https://cognito-idp.us-west-2.amazonaws.com/us-west-2_oytZzrhL9",
+  client_id: "55ppf2j5tchab139kvnfo90hrc",
+  redirect_uri: "http://localhost:5173/",
+  response_type: "code",
+  scope: "email openid phone",
+};
+
 import { logStore } from './lib/stores/logs';
 
 export default function App() {
@@ -93,8 +101,10 @@ export default function App() {
   }, []);
 
   return (
-    <Layout>
-      <Outlet />
-    </Layout>
+    <AuthProvider {...cognitoAuthConfig}>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </AuthProvider>
   );
 }
