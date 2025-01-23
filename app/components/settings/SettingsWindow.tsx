@@ -12,6 +12,7 @@ import DebugTab from './debug/DebugTab';
 import EventLogsTab from './event-logs/EventLogsTab';
 import ConnectionsTab from './connections/ConnectionsTab';
 import DataTab from './data/DataTab';
+import { useAuth } from 'react-oidc-context';
 
 interface SettingsProps {
   open: boolean;
@@ -50,7 +51,15 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
         ]
       : []),
   ];
+  const auth = useAuth();
 
+  const signOutRedirect = () => {
+    const clientId = "48e1tljiaintp8pfj1veq7uar0";
+    const logoutUri = "<logout uri>";
+    const cognitoDomain = "https://us-west-2djvpfenz0.auth.us-west-2.amazoncognito.com";
+    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+  };
+  
   return (
     <RadixDialog.Root open={open}>
       <RadixDialog.Portal>
@@ -110,6 +119,14 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
                     <div className="i-ph:book" />
                     Docs
                   </a>
+                  <span
+                    rel="noopener noreferrer"
+                    className={classNames(styles['settings-button'],'!bg-bolt-elements-button-danger-background cursor-pointer !hover:bg-bolt-elements-button-danger-backgroundHover !text-bolt-elements-button-danger-text flex items-center gap-2')}
+                    onClick={()=> signOutRedirect()}
+                  >
+                    <div className="i-ph:book" />
+                    Logout
+                  </span>
                 </div>
               </div>
 
