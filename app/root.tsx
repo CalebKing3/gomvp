@@ -79,9 +79,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 const cognitoAuthConfig = {
-  authority: "https://cognito-idp.us-west-2.amazonaws.com/us-west-2_djVPFenz0",
-  client_id: "48e1tljiaintp8pfj1veq7uar0",
-  redirect_uri: "http://localhost:5173/",
+  authority: import.meta.env.VITE_AUTHORITY,
+  client_id: import.meta.env.VITE_CLIENT_ID,
+  redirect_uri: import.meta.env.VITE_REDIRECT_URI,
   response_type: "code",
   scope: "email openid phone",
 };

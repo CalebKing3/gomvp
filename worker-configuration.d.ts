@@ -17,4 +17,9 @@ interface Env {
   XAI_API_KEY: string;
   PERPLEXITY_API_KEY: string;
   AWS_BEDROCK_CONFIG: string;
+  VITE_COGNITO_DOMAIN: string;
+  VITE_CLIENT_ID : string;
+  VITE_REDIRECT_URI : string;
+  VITE_AUTHORITY: string;
+  VITE_COGNITO_DOMAIN: string;
 }

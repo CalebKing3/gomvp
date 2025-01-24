@@ -53,13 +53,50 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
   ];
   const auth = useAuth();
 
-  const signOutRedirect = () => {
-    const clientId = "48e1tljiaintp8pfj1veq7uar0";
-    const logoutUri = "<logout uri>";
-    const cognitoDomain = "https://us-west-2djvpfenz0.auth.us-west-2.amazoncognito.com";
+  const signOutRedirect = async() => {
+    const logoutUri = "http://localhost:5173";
+auth.signinRedirect();
+    const cognitoAuthConfig = {
+      authority: import.meta.env.VITE_AUTHORITY,
+      client_id: import.meta.env.VITE_CLIENT_ID,
+      redirect_uri: import.meta.env.VITE_REDIRECT_URI,
+      response_type: "code",
+      scope: "email openid phone",
+    };
+
+    const clientId = import.meta.env.VITE_CLIENT_ID;
+    
+    const cognitoDomain = import.meta.env.VITE_COGNITO_DOMAIN;
+
+    const tempURL = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+    const state = "15c3898e4dc44277a6e8ccc12e142fe4";
+    const scope = "email+openid+phone";
+    const code = "e3d3c303-6d07-4f94-a328-5b7ddcfcf4a9";
+
+    const lastEffort = `
+      ${cognitoDomain}/logout?
+      response_type=${code}&
+      client_id=${clientId}&
+      redirect_uri=${logoutUri}&
+      state=${state}&
+      scope=${scope}
+    `;
+
+    await auth.signoutSilent({
+      // post_logout_redirect_uri: lastEffort,
+      // state: "9952aeeebf70416cbbcdfb150dbaa7c3",
+    });
+
+    window.location.href = lastEffort;
+
+    const user = await auth.signoutSilent({
+      post_logout_redirect_uri: logoutUri
+    });
+
+    
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+    
   };
-  
   return (
     <RadixDialog.Root open={open}>
       <RadixDialog.Portal>
