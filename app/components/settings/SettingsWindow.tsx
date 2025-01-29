@@ -12,7 +12,6 @@ import DebugTab from './debug/DebugTab';
 import EventLogsTab from './event-logs/EventLogsTab';
 import ConnectionsTab from './connections/ConnectionsTab';
 import DataTab from './data/DataTab';
-import { useAuth } from 'react-oidc-context';
 
 interface SettingsProps {
   open: boolean;
@@ -51,52 +50,19 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
         ]
       : []),
   ];
-  const auth = useAuth();
 
-  const signOutRedirect = async() => {
-    const logoutUri = "http://localhost:5173";
-auth.signinRedirect();
-    const cognitoAuthConfig = {
-      authority: import.meta.env.VITE_AUTHORITY,
-      client_id: import.meta.env.VITE_CLIENT_ID,
-      redirect_uri: import.meta.env.VITE_REDIRECT_URI,
-      response_type: "code",
-      scope: "email openid phone",
-    };
+  const signOutRedirect = async () => {
+    localStorage.clear();
+    sessionStorage.clear();
 
-    const clientId = import.meta.env.VITE_CLIENT_ID;
-    
-    const cognitoDomain = import.meta.env.VITE_COGNITO_DOMAIN;
-
-    const tempURL = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
-    const state = "15c3898e4dc44277a6e8ccc12e142fe4";
-    const scope = "email+openid+phone";
-    const code = "e3d3c303-6d07-4f94-a328-5b7ddcfcf4a9";
-
-    const lastEffort = `
-      ${cognitoDomain}/logout?
-      response_type=${code}&
-      client_id=${clientId}&
-      redirect_uri=${logoutUri}&
-      state=${state}&
-      scope=${scope}
-    `;
-
-    await auth.signoutSilent({
-      // post_logout_redirect_uri: lastEffort,
-      // state: "9952aeeebf70416cbbcdfb150dbaa7c3",
-    });
-
-    window.location.href = lastEffort;
-
-    const user = await auth.signoutSilent({
-      post_logout_redirect_uri: logoutUri
-    });
-
-    
-    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
-    
+    setTimeout(() => {
+      const clientId = import.meta.env.VITE_CLIENT_ID;
+      const logoutUri = import.meta.env.VITE_REDIRECT_URI;
+      const cognitoDomain = import.meta.env.VITE_COGNITO_DOMAIN;
+      window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+    }, 1000);
   };
+
   return (
     <RadixDialog.Root open={open}>
       <RadixDialog.Portal>
@@ -158,8 +124,11 @@ auth.signinRedirect();
                   </a>
                   <span
                     rel="noopener noreferrer"
-                    className={classNames(styles['settings-button'],'!bg-bolt-elements-button-danger-background cursor-pointer !hover:bg-bolt-elements-button-danger-backgroundHover !text-bolt-elements-button-danger-text flex items-center gap-2')}
-                    onClick={()=> signOutRedirect()}
+                    className={classNames(
+                      styles['settings-button'],
+                      '!bg-bolt-elements-button-danger-background cursor-pointer !hover:bg-bolt-elements-button-danger-backgroundHover !text-bolt-elements-button-danger-text flex items-center gap-2',
+                    )}
+                    onClick={() => signOutRedirect()}
                   >
                     <div className="i-ph:book" />
                     Logout

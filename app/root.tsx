@@ -6,7 +6,7 @@ import { themeStore } from './lib/stores/theme';
 import { stripIndents } from './utils/stripIndent';
 import { createHead } from 'remix-island';
 import { useEffect } from 'react';
-import { AuthProvider } from 'react-oidc-context'
+import { AuthProvider } from 'react-oidc-context';
 import reactToastifyStyles from 'react-toastify/dist/ReactToastify.css?url';
 import globalStyles from './styles/index.scss?url';
 import xtermStyles from '@xterm/xterm/css/xterm.css?url';
@@ -82,8 +82,8 @@ const cognitoAuthConfig = {
   authority: import.meta.env.VITE_AUTHORITY,
   client_id: import.meta.env.VITE_CLIENT_ID,
   redirect_uri: import.meta.env.VITE_REDIRECT_URI,
-  response_type: "code",
-  scope: "email openid phone",
+  response_type: 'code',
+  scope: 'email openid phone',
 };
 
 import { logStore } from './lib/stores/logs';
